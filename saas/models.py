@@ -74,7 +74,7 @@ from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 from django.utils.http import quote
 from django.utils.safestring import mark_safe
-from django.utils import six
+import six
 from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 from rest_framework.exceptions import ValidationError

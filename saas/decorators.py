@@ -39,7 +39,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import available_attrs
-from django.utils import six
+import six
 from django.utils.translation import ugettext_lazy as _
 
 from . import settings
