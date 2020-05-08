@@ -72,7 +72,6 @@ from django.db.models.query import QuerySet
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.http import quote
 from django.utils.safestring import mark_safe
 from django.utils import six
@@ -207,7 +206,6 @@ class OrganizationManager(models.Manager):
             organization=organization))
 
 
-@python_2_unicode_compatible
 class Organization(models.Model):
     """
     The Organization table stores information about who gets
@@ -1132,7 +1130,6 @@ class Organization(models.Model):
                             'amount': balance_due})
 
 
-@python_2_unicode_compatible
 class RoleDescription(models.Model):
     """
     By default, when a ``User`` grants a ``Role`` on an ``Organization``
@@ -1202,7 +1199,6 @@ class RoleManager(models.Manager):
         return self.filter(grant_key=None, request_key=None, **kwargs)
 
 
-@python_2_unicode_compatible
 class Role(models.Model):
 
     objects = RoleManager()
@@ -1227,7 +1223,6 @@ class Role(models.Model):
             str(self.organization), str(self.user))
 
 
-@python_2_unicode_compatible
 class Agreement(models.Model):
 
     slug = models.SlugField(unique=True)
@@ -1265,7 +1260,6 @@ class SignatureManager(models.Manager):
         return True
 
 
-@python_2_unicode_compatible
 class Signature(models.Model):
 
     objects = SignatureManager()
@@ -1467,7 +1461,6 @@ class ChargeManager(models.Manager):
             raise
 
 
-@python_2_unicode_compatible
 class Charge(models.Model):
     """
     Keep track of charges that have been emitted by the app.
@@ -2175,7 +2168,6 @@ class ChargeItemManager(models.Manager):
         return results
 
 
-@python_2_unicode_compatible
 class ChargeItem(models.Model):
     """
     Keep track of each item invoiced within a ``Charge``.
@@ -2435,7 +2427,6 @@ class CouponManager(models.Manager):
             organization=organization)
 
 
-@python_2_unicode_compatible
 class Coupon(models.Model):
     """
     Coupons are used on invoiced to give a rebate to a customer.
@@ -2552,7 +2543,6 @@ class PlanManager(models.Manager):
         return result
 
 
-@python_2_unicode_compatible
 class Plan(SlugTitleMixin, models.Model):
     """
     Recurring billing plan.
@@ -2856,7 +2846,6 @@ def on_plan_post_save(sender, instance, created, raw, **kwargs):
             signals.plan_updated.send(sender=sender, plan=instance)
 
 
-@python_2_unicode_compatible
 class UseCharge(SlugTitleMixin, models.Model):
     """
     Additional use charges on a ``Plan``.
@@ -2919,7 +2908,6 @@ class CartItemManager(models.Manager):
         return coupon_applied
 
 
-@python_2_unicode_compatible
 class CartItem(models.Model):
     """
     A user (authenticated or anonymous) shops for plans by adding them
@@ -3103,7 +3091,6 @@ class SubscriptionManager(models.Manager):
         return self.get_queryset().valid_for(**kwargs)
 
 
-@python_2_unicode_compatible
 class Subscription(models.Model):
     """
     ``Subscription`` represent a service contract (``Plan``) between
@@ -4116,7 +4103,6 @@ class TransactionManager(models.Manager):
         return results
 
 
-@python_2_unicode_compatible
 class Transaction(models.Model):
     """
     The Transaction table stores entries in the double-entry bookkeeping
@@ -4240,7 +4226,6 @@ class Transaction(models.Model):
         return None
 
 
-@python_2_unicode_compatible
 class BalanceLine(models.Model):
     """
     Defines a line in a balance sheet. All ``Transaction`` account matching

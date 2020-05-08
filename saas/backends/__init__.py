@@ -27,13 +27,11 @@ from importlib import import_module
 
 from django.conf import settings as django_settings
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from stripe.error import APIConnectionError as ProcessorConnectionError
 
 from .. import settings
 
-@python_2_unicode_compatible
 class ProcessorError(RuntimeError):
 
     def __init__(self, message, backend_except=None):
@@ -50,7 +48,6 @@ class ProcessorError(RuntimeError):
         return "(processor exception: %s)" % str(self.backend_except)
 
 
-@python_2_unicode_compatible
 class ProcessorSetupError(ProcessorError):
     """
     Error class specific for setup of processor account
@@ -68,7 +65,6 @@ class ProcessorSetupError(ProcessorError):
         return result
 
 
-@python_2_unicode_compatible
 class CardError(ProcessorError):
 
     def __init__(self, message, code,
